@@ -39,6 +39,14 @@ public class HttpRequestParserTest {
     }
 
     @Test
+    public void inits() throws Exception {
+        HttpRequestParser requestParser = new HttpRequestParser();
+        assertTrue(requestParser.httpRequestBodyParser != null);
+        assertTrue(requestParser.httpRequestLineParser != null);
+        assertTrue(requestParser.httpRequestHeadersParser != null);
+    }
+
+    @Test
     public void callsTheRequestLineParser() throws Exception {
         this.requestParser.parseRequestLineAndHeaders(null);
         assertEquals(1, this.httpRequestLineParserMock.parseCalledCount);

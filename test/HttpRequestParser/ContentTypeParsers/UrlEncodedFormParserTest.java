@@ -9,8 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * Author: Myles Megyesi
@@ -32,6 +31,16 @@ public class UrlEncodedFormParserTest {
     @Test
     public void parsesZeroParameters() throws Exception {
         assertEquals(0, this.parser.parse(this.stringToStream("")).size());
+    }
+
+    @Test
+    public void returnsTrueForTheRightContentType() throws Exception {
+        assertTrue(this.parser.canParseContentType("application/x-www-form-urlencoded"));
+    }
+
+    @Test
+    public void returnsFalseForTheWrongContentType() throws Exception {
+        assertFalse(this.parser.canParseContentType("application/multipart"));
     }
 
     @Test
