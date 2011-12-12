@@ -42,6 +42,12 @@ public class InputStreamReader {
         return builder.toString();
     }
 
+    public String read(InputStream inputStream, int length) throws IOException {
+        byte[] b = new byte[length];
+        inputStream.read(b);
+        return new String(b);
+    }
+
     public String readUntil(InputStream inputStream, int character) throws IOException {
         StringBuilder builder = new StringBuilder();
         int nextByte;

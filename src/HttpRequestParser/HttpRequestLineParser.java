@@ -27,7 +27,7 @@ public class HttpRequestLineParser {
     }
 
     public HttpRequestLine parse(InputStream inputStream) throws IOException, ParseException {
-        String requestLine = inputStreamReader.getNextLine(inputStream);
+        String requestLine = this.inputStreamReader.getNextLine(inputStream);
         String[] requestLineItems = this.splitStringOnWhitespace(requestLine);
         if (requestLineItems.length != 3) {
             throw new ParseException(String.format("Improperly formatted request line: %s", requestLine));
@@ -41,7 +41,7 @@ public class HttpRequestLineParser {
 
     private HttpRequestLine parseRequestItems(String[] requestLineItems) throws IOException, ParseException {
         String[] requestUriItems = parseRequestUri(requestLineItems[1]);
-        return new HttpRequestLine(requestLineItems[0], requestUriItems[0], requestLineItems[2], this.urlEncodedFormParser.parse(new ByteArrayInputStream(requestUriItems[1].getBytes())));
+        return new HttpRequestLine(requestLineItems[0], requestUriItems[0], requestLineItems[2], this.urlEncodedFormParser.parse(new ByteArrayInputStream(requestUriItems[1].getBytes()), requestUriItems[1].length()));
     }
 
     private String[] parseRequestUri(String requestUri) {

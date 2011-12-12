@@ -21,7 +21,7 @@ public class ContentTypeParserMock implements ContentTypeParser {
         return canParse;
     }
 
-    public Map<String, Object> parse(InputStream inputStream) {
+    public Map<String, Object> parse(InputStream inputStream, int contentLength) {
         this.parseCalledCount++;
         return null;
     }

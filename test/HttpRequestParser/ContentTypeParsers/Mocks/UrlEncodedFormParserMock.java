@@ -17,7 +17,7 @@ public class UrlEncodedFormParserMock extends UrlEncodedFormParser {
     public String parsePassed = "";
 
     @Override
-    public Map<String, Object> parse(InputStream inputStream) {
+    public Map<String, Object> parse(InputStream inputStream, int contentLength) {
         this.parseCalledCount++;
         try {
             this.parsePassed = new InputStreamReader().toString(inputStream);

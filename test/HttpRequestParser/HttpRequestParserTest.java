@@ -60,7 +60,7 @@ public class HttpRequestParserTest {
 
     @Test
     public void callsTheBodyParser() throws Exception {
-        this.requestParser.parseBody(null, "");
+        this.requestParser.parseBody(null, "", 0);
         assertEquals(1, this.httpRequestBodyParserMock.parseCalledCount);
     }
 

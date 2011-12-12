@@ -33,13 +33,13 @@ public class HttpRequestBodyParserTest {
         ContentTypeParserMock contentTypeParserMock2 = new ContentTypeParserMock(true);
         this.parser.contentTypeParsers.add(contentTypeParserMock1);
         this.parser.contentTypeParsers.add(contentTypeParserMock2);
-        this.parser.parse(null, null);
+        this.parser.parse(null, null, 0);
         assertEquals(1, contentTypeParserMock2.parseCalledCount);
     }
 
     @Test(expected = ParseException.class)
     public void throwsWhenNoParsers() throws Exception {
-        this.parser.parse(null, null);
+        this.parser.parse(null, null, 0);
     }
 
     @Test(expected = ParseException.class)
@@ -48,7 +48,7 @@ public class HttpRequestBodyParserTest {
         ContentTypeParserMock contentTypeParserMock2 = new ContentTypeParserMock(false);
         this.parser.contentTypeParsers.add(contentTypeParserMock1);
         this.parser.contentTypeParsers.add(contentTypeParserMock2);
-        this.parser.parse(null, null);
+        this.parser.parse(null, null, 0);
     }
 
 }

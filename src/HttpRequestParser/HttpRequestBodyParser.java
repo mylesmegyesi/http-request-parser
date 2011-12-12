@@ -25,10 +25,10 @@ public class HttpRequestBodyParser {
         this.contentTypeParsers = contentTypeParsers;
     }
 
-    public Map<String, Object> parse(InputStream inputStream, String contentType) throws ParseException, IOException {
+    public Map<String, Object> parse(InputStream inputStream, String contentType, int contentLength) throws ParseException, IOException {
         for (ContentTypeParser parser : this.contentTypeParsers) {
             if (parser.canParseContentType(contentType)) {
-                return parser.parse(inputStream);
+                return parser.parse(inputStream, contentLength);
             }
         }
         throw new ParseException("Could not find an appropriate parser for the given content type.");

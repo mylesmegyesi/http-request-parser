@@ -13,5 +13,5 @@ public interface ContentTypeParser {
 
     public boolean canParseContentType(String contentType);
 
-    public Map<String, Object> parse(InputStream inputStream) throws ParseException, IOException;
+    public Map<String, Object> parse(InputStream inputStream, int contentLength) throws ParseException, IOException;
 }

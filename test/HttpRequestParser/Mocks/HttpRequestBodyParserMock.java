@@ -14,7 +14,7 @@ public class HttpRequestBodyParserMock extends HttpRequestBodyParser {
     public String contentTypePassed = "";
 
     @Override
-    public Map<String, Object> parse(InputStream inputStream, String contentType) {
+    public Map<String, Object> parse(InputStream inputStream, String contentType, int contentLength) {
         this.parseCalledCount++;
         this.contentTypePassed = contentType;
         return null;

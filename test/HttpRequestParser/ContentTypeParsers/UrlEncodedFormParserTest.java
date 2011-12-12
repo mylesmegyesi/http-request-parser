@@ -30,7 +30,7 @@ public class UrlEncodedFormParserTest {
 
     @Test
     public void parsesZeroParameters() throws Exception {
-        assertEquals(0, this.parser.parse(this.stringToStream("")).size());
+        assertEquals(0, this.parser.parse(this.stringToStream(""), 0).size());
     }
 
     @Test
@@ -45,7 +45,8 @@ public class UrlEncodedFormParserTest {
 
     @Test
     public void parsesOneParameters() throws Exception {
-        Map<String, Object> params = this.parser.parse(this.stringToStream("text=myText"));
+        String request = "text=myText";
+        Map<String, Object> params = this.parser.parse(this.stringToStream("text=myText"), request.length());
         assertEquals(1, params.size());
         assertTrue(params.containsKey("text"));
         assertEquals("myText", params.get("text"));
@@ -53,7 +54,8 @@ public class UrlEncodedFormParserTest {
 
     @Test
     public void parsesTwoParameters() throws Exception {
-        Map<String, Object> params = this.parser.parse(this.stringToStream("text=myText&textTwo=Hello+Gnter"));
+        String request = "text=myText&textTwo=Hello+Gnter";
+        Map<String, Object> params = this.parser.parse(this.stringToStream(request), request.length());
         assertEquals(2, params.size());
         assertTrue(params.containsKey("textTwo"));
         assertEquals("Hello Gnter", params.get("textTwo"));
@@ -61,7 +63,8 @@ public class UrlEncodedFormParserTest {
 
     @Test
     public void returnsEmptyForNoValue() throws Exception {
-        Map<String, Object> params = this.parser.parse(this.stringToStream("text="));
+        String request = "text=";
+        Map<String, Object> params = this.parser.parse(this.stringToStream("text="), request.length());
         assertEquals(1, params.size());
         assertTrue(params.containsKey("text"));
         assertEquals("", params.get("text"));
@@ -69,7 +72,7 @@ public class UrlEncodedFormParserTest {
 
     @Test(expected = ParseException.class)
     public void throwsOnBadRequest() throws Exception {
-        this.parser.parse(this.stringToStream("=ad"));
+        this.parser.parse(this.stringToStream("=ad"), 3);
     }
 
     private InputStream stringToStream(String str) {

@@ -25,8 +25,8 @@ public class UrlEncodedFormParser implements ContentTypeParser {
         return contentType.equals("application/x-www-form-urlencoded");
     }
 
-    public Map<String, Object> parse(InputStream inputStream) throws IOException, ParseException {
-        String query = URLDecoder.decode(this.inputStreamReader.getNextLine(inputStream), "UTF-8");
+    public Map<String, Object> parse(InputStream inputStream, int contentLength) throws IOException, ParseException {
+        String query = URLDecoder.decode(this.inputStreamReader.read(inputStream, contentLength), "UTF-8");
         String[] stringParams = query.split("&");
         return parseParams(query, stringParams);
     }

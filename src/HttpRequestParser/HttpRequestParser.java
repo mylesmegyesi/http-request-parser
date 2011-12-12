@@ -35,8 +35,8 @@ public class HttpRequestParser {
         return new HttpRequest(requestLine.action, requestLine.uri, requestLine.protocolVersion, requestHeaders, requestLine.parameters);
     }
 
-    public Map<String, Object> parseBody(InputStream inputStream, String contentType) throws IOException, ParseException {
-        return this.httpRequestBodyParser.parse(inputStream, contentType);
+    public Map<String, Object> parseBody(InputStream inputStream, String contentType, int contentLength) throws IOException, ParseException {
+        return this.httpRequestBodyParser.parse(inputStream, contentType, contentLength);
     }
 
 }
